@@ -14,13 +14,11 @@ class Group:
         self.admin = admin
         self.clients = {}
         self.offlineMessages = {}
-        self.allMembers = set()
         self.onlineMembers = set()
         self.joinRequests = set()
         self.waitClients = {}
 
         self.clients[admin] = client
-        self.allMembers.add(admin)
         self.onlineMembers.add(admin)
 
     def disconnect(self, username):
@@ -83,10 +81,6 @@ def gangChat(client, username, groupname):
             del groups[groupname].waitClients[username]
             print("Waiting Client:", username, "Disconnected")
             break
-        elif msg == "/allMembers":
-            client.send(b"/allMembers")
-            client.recv(1024).decode("utf-8")
-            client.send(pickle.dumps(groups[groupname].allMembers))
         elif msg == "/onlineMembers":
             client.send(b"/onlineMembers")
             client.recv(1024).decode("utf-8")

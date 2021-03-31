@@ -99,22 +99,18 @@ def userInput(serverSocket):
 		state["sendMessageLock"].release()
 		with state["inputCondition"]:
 			state["inputCondition"].notify()
-		if state["userInput"] == "/1":
+		if state["userInput"] == "/2":
 			serverSocket.send(b"/viewRequests")
-		elif state["userInput"] == "/2":
+		elif state["userInput"] == "/1":
 			serverSocket.send(b"/approveRequest")
-		elif state["userInput"] == "/3":
-			serverSocket.send(b"/disconnect")
 			break
-		elif state["userInput"] == "/4":
-			serverSocket.send(b"/allMembers")
-		elif state["userInput"] == "/5":
+		elif state["userInput"] == "/3":
 			serverSocket.send(b"/onlineMembers")
-		elif state["userInput"] == "/6":
+		elif state["userInput"] == "/4":
 			serverSocket.send(b"/changeAdmin")
-		elif state["userInput"] == "/7":
+		elif state["userInput"] == "/5":
 			serverSocket.send(b"/whoAdmin")
-		elif state["userInput"] == "/8":
+		elif state["userInput"] == "/6":
 			serverSocket.send(b"/kickMember")
 		elif state["inputMessage"]:
 			state["sendMessageLock"].acquire()
@@ -180,7 +176,7 @@ def main():
 		if state["alive"] or state["joinDisconnect"]:
 			break
 	if state["alive"]:
-		print("Available Commands:\n/1 -> View Join Requests (Admins)\n/2 -> Approve Join Requests (Admin)\n/Ctrl+C -> Disconnect\n/4 -> View All Members\n/5 -> View Online Group Members\n/6 -> Transfer Adminship\n/7 -> Check Group Admin\n/8 -> Kick Member\nType anything else to send a message")
+		print("Available Commands:\n/Ctrl+C -> Disconnect\n/1 -> Approve Join Requests (Admin)\n/2 -> View Join Request(admins)\n/3 -> View Online Group Members\n/4 -> Transfer Adminship\n/5 -> Check Group Admin\n/6 -> Kick Member\nType anything else to send a message")
 		waitUserInputThread.join()
 		waitServerListenThread.join()
 		userInputThread.start()
@@ -203,8 +199,8 @@ def main():
 if __name__ == "__main__":
 	try:
 		main()
-	except KeyboardInterrupt:
+	except (KeyboardInterrupt, EOFError):
 		if print('Disconnected from server , Restart Client to join again'):
-			sys.exit()
+			exit()
 
 
