@@ -1,4 +1,10 @@
 # -ChatRoomComp1549New
+Group Members:
+Hans Singh: 001020813
+Aayoob Min Mohammed: 001068799
+Sandeep Singh: 001014849
+Gurdeep Singh:001087050
+
 Configuration for Server-
 Batch files must be configured before use - First line must be manually configured to locate python -C:\Users\hansg\AppData\Local\Programs\Python\Python39\python.exe- for example the second line must be configured to locate the server code - "C:\Users\hansg\OneDrive - University of Greenwich\Documents\ChatRoom-main\server.py"- for example.
 Lastly, you can include the desired IP and ports you wish to start the server on and the server file will be ready for use.
